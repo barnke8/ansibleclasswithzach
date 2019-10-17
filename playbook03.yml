@@ -1,0 +1,26 @@
+---
+- name: Install with yum and apt
+  gather_facts: yes
+  hosts: planetexpress
+
+  tasks:
+          - name: install with apt
+            apt:
+                    state: present
+                    name:       
+                         - sl
+                         - bastet
+                         - moon-buggy
+                         - ninvaders
+            become: yes
+            when: ansible_os_family=="Debian"
+
+          - name: install with yum
+            yum:
+                    state: present
+                    name:
+                         - sl
+                         - moon-buggy
+                         - ninvaders
+            become: yes
+            when: ansible_os_family=="Redhat"

@@ -1,0 +1,7 @@
+---
+- name: using my role
+  gather_facts: yes
+  hosts: planet-express
+
+  roles:
+          - kelly.findafile

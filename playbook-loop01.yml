@@ -1,0 +1,29 @@
+---
+- name: Intro to looping
+  hosts: localhost
+  gather_facts: yes
+
+  vars: # vars available to all tasks
+        ethlist:
+                - "eth0"
+                - "eth1"
+                - "eth2"
+                - "eth3"
+        ethlist2: [eth4,eth5]
+  tasks:
+      - name: Demo var recall 
+        debug:
+          # item is always the var mapped to loop
+                msg: "the debug module allows us to display to the screen: {{ ethlist }}"
+      - name: Demo a tiny loop
+        debug:
+          # item is always the var mapped to the loop
+                msg: "all modules can also have LOCAL var information: {{ item }}"
+        loop: "{{ ethlist }}"
+
+      - name: cast local vars into loop
+        debug:
+                var: item
+        loop:
+                - 192.168.70.1
+                - 10.10.0.1

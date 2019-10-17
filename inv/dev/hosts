@@ -1,0 +1,10 @@
+[planet-express]
+bender	ansible_host=10.10.2.3 ansible_user=bender spacedollars=2
+fry 	ansible_host=10.10.2.4 ansible_user=fry
+zoidberg	ansible_host=10.10.2.5 ansible_user=zoidberg
+farnsworth	ansible_host=10.10.2.6 ansible_user=farnsworth
+
+[planet-express:vars]
+spacedollars=100000
+cargoinv=slurm
+warpmatter=dark matter

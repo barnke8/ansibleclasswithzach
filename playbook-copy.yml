@@ -1,0 +1,10 @@
+---
+- name: copy file fry.txt to remote node
+  hosts: planet-express:!bender
+
+  tasks: 
+
+    - name: copy frys resume to hosts
+      copy:
+        src: ~/ans/files/fry.txt    # file I created on the controller
+        dest: ~/fry.txt   # file name on the remote hosts

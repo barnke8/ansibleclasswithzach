@@ -1,0 +1,3 @@
+---
+patt: "*.pcap,*pcapng"
+pathy: "~/"

@@ -1,0 +1,15 @@
+---
+- name: copy file fry.txt to remote node
+  hosts: planet-express:!bender
+
+  tasks: 
+
+    - name: copy frys resume to hosts
+      copy:
+        src: ~/ans/files/fry.txt    # file I created on the controller
+        dest: ~/fry.txt   # file name on the remote hosts
+
+    - name: download a file tomy remote servers
+      get_url:
+             url: http://www.clamav.net/downloads/production/clamav-0.99.3.tar.gz
+             dest: ~/clamav-0.99.3.tar.gz

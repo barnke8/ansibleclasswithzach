@@ -1,0 +1,36 @@
+---
+- name: find files and fetch it back to controller
+  gather_facts: yes
+  hosts: planet-express
+
+  vars:
+          patt: "*.pcap,*pcapng"
+          pathy: "~/"
+  
+  tasks: 
+      - name: Find / files enidng with .pcap or .pcapng
+        find:
+                paths: "{{ pathy }}"
+                patterns: "{{ patt }}"
+                # Size: 10m
+                recurse: yes
+        register: data
+
+      - name: what are the results
+        debug:
+                var: data.files | map(attribute='path') | list
+                verbosity: 1
+      
+      - name: create a dir to store our files we found
+        file:
+                path: "~/searchresults/{{ inventory_hostname }}"
+                state: directory
+        delegate_to: localhost
+      
+      - name: fetch the results (files)
+        fetch:
+                src: "{{ item.path }}"
+                dest: "~/searchresults/{{ inventory_hostname }}/"
+                flat: yes
+        loop: "{{ data.files }}"          
+
